@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>URL Shortener</title>
+  </head>
+  <body>
+    <h1>URL Shortener</h1>
+    <form action="/api/shorten" method="post">
+      <input
+        type="text"
+        name="originalUrl"
+        placeholder="Enter URL to short"
+        required
+      />
+      <button type="submit">Shorten URL</button>
+    </form>
+
+    <h1>Shortened URLs</h1>
+    <ol>
+      <% urls.forEach(url => {%>
+      <li>
+        <a href="/api/<%= url.shortCode %>" target="_blank"
+          >http://localhost:5000/api/<%= url.shortCode %></a
+        >
+
+        ➡ <%= url.originalUrl %> ➡ Visited count: <%= url.visitedHistory.length
+        %>
+        <a href="/api/analytics/<%= url.shortCode %>">Details</a>
+      </li>
+
+      <% }) %>
+    </ol>
+    <button><a href="/auth/logoutUser">Log Out</a></button>
+  </body>
+</html>
